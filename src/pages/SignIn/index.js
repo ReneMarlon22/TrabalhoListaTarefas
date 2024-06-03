@@ -1,13 +1,22 @@
-
-import React from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, TextComponent } from "react-native";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import * as Animatable from 'react-native-animatable';
 
-import * as Animatable from 'react-native-animatable'
-
-export default function SignIn() {
+const SignIn = () => {
     const navigation = useNavigation();
-    return(
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+
+    const handleLogin = () => {
+        if (email === 'rene.marlon.27@gmail.com' && senha === '12345'){
+            navigation.navigate('Lista');
+        } else{
+            Alert.alert('Erro de Login' , 'Usuário ou senha incorretos') ;
+        }
+    };
+
+    return (
         <View style={styles.container}>
             <Animatable.View animation="fadeInLeft" delay={500} style={styles.containerHeader}>
                 <Text style={styles.message}>Bem Vindo </Text>
@@ -18,26 +27,29 @@ export default function SignIn() {
                 <TextInput
                     placeholder="Digite um Email"
                     style={styles.input}
+                    value={email}
+                    onChangeText={setEmail}
                 />
 
                 <Text style={styles.title}>Senha</Text>
                 <TextInput
                     placeholder="Sua Senha"
                     style={styles.input}
+                    value={senha}
+                    onChangeText={setSenha}
+                    secureTextEntry
                 />
 
                 <TouchableOpacity
-                 style={styles.button}
-                 onPress={ () => navigation.navigate('Lista')}
-                 >
+                    style={styles.button}
+                    onPress={handleLogin}
+                >
                     <Text style={styles.buttonLista}>Acessar</Text>
                 </TouchableOpacity>
 
-               <TouchableOpacity style={styles.buttonRegister}>
-                <Text style={styles.registerText}>Não possui uma conta? Cadastre-se</Text>
-               </TouchableOpacity>
-
-
+                <TouchableOpacity style={styles.buttonRegister}>
+                    <Text style={styles.registerText}>Não possui uma conta? Cadastre-se</Text>
+                </TouchableOpacity>
             </Animatable.View>
         </View>
     );
@@ -98,3 +110,5 @@ const styles = StyleSheet.create({
         color: '#a1a1a1'
     }
 })
+
+export default SignIn;

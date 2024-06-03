@@ -24,7 +24,7 @@ function deletar(indexParameter){
       <Text style={styles.Titulo}>Lista de Tarefas</Text>
 
       <View style={styles.boxInput}>
-        <TextInput style={styles.input} placeholder='Digite algo'onChangeText={pegarTexto}></TextInput>
+        <TextInput style={styles.input} placeholder='Digite a tarefa'onChangeText={pegarTexto}></TextInput>
         <Button title='Adicionar'onPress={adcTexto}></Button>
       </View>
 
